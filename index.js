@@ -9,10 +9,18 @@ const app = express()
 
 const port = process.env.PORT || 3000
 
-main().catch(err => console.log(err));
-async function main() {
-  await mongoose.connect(process.env.MONGO_URL);
-}
+mongoose.connect(process.env.MONGO_URL)
+.then(()=>{
+    console.log("mongodb is successfully connected");
+})
+.catch((err)=>{
+    console.log(err);
+})
+
+// main().catch(err => console.log(err));
+// async function main() {
+//   await mongoose.connect(process.env.MONGO_URL);
+// }
 
 app.use(express.json())
 
