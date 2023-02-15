@@ -7,7 +7,14 @@ dotenv.config()
 
 const app = express()
 
-const port = process.nextTick.PORT || 3000
+const port = process.env.PORT || 3000
+
+main().catch(err => console.log(err));
+async function main() {
+  await mongoose.connect(process.env.MONGO_URL);
+}
+
+app.use(express.json())
 
 app.listen(port,()=>{
     console.log(`server is running at port ${port}`);
